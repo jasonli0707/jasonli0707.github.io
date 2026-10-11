@@ -8,7 +8,7 @@ function update() {
   const query = search.value.trim().toLocaleLowerCase();
   let count = 0;
   for (const paper of papers) {
-    const visible = (active === 'all' || paper.dataset.topic === active) &&
+    const visible = (active === 'all' || (active === 'lead' && paper.dataset.lead === 'true')) &&
       paper.textContent.toLocaleLowerCase().includes(query);
     paper.hidden = !visible;
     if (visible) count++;
