@@ -19,3 +19,9 @@ main{min-width:0}.eyebrow{font-size:11px;letter-spacing:1.7px;color:var(--accent
 body{font-size:17px;line-height:1.7}h1,h2,h3{font-weight:600}h1{font-size:46px;letter-spacing:-1px}h2{font-size:30px;letter-spacing:-.4px}.lead{font-size:26px;color:var(--text);font-weight:400;letter-spacing:0}.featured h3{font-size:23px}.publication h3{font-size:18px}.research-number{font-style:normal}.authors{font-size:14px}.research-row p{font-size:16px}@media(max-width:700px){h1{font-size:36px;letter-spacing:-.7px}h2{font-size:26px}.lead{font-size:23px}body{font-size:16px}.featured h3{font-size:22px}}
 
 .site-activity{border-top:1px solid var(--line);margin-top:20px;padding-top:16px}.activity-title{font-size:13px;font-weight:600;margin-bottom:8px}.site-activity img{display:block;max-width:100%}.activity-note{font-size:11px;color:var(--muted);margin:8px 0 0}@media(max-width:700px){.site-activity{grid-column:1/-1;margin-top:16px;padding-top:12px}}
+
+/* Chinese typography and language navigation */
+html[lang="zh-CN"] { --sans: 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif; }
+html[lang="zh-CN"] h1, html[lang="zh-CN"] h2, html[lang="zh-CN"] h3 { letter-spacing: 0; }
+.language-switch { white-space: nowrap; }
+.topbar nav { flex-wrap: wrap; }

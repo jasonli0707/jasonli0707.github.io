@@ -14,7 +14,7 @@ function update() {
     if (visible) count++;
   }
   buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === active)));
-  document.querySelector('#result-count').textContent = count + (count === 1 ? ' publication' : ' publications');
+  document.querySelector('#result-count').textContent = document.documentElement.lang === 'zh-CN' ? count + ' 篇论文' : count + (count === 1 ? ' publication' : ' publications');
   document.querySelector('#no-results').hidden = count !== 0;
 }
 function reset() { active = 'all'; search.value = ''; update(); }
