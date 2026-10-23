@@ -6,6 +6,7 @@
   const presets = [...root.querySelectorAll('[data-weights]')];
   const fields = [...root.querySelectorAll('[data-metric]')];
   const status = root.querySelector('[data-demo-status]');
+  const confidenceDetail = root.querySelector('[data-confidence-detail]');
   const format = x => Number(x.toFixed(3)).toString();
   const update = () => {
     const weights = inputs.map(input => Number(input.value));
@@ -22,6 +23,7 @@
     presets.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.weights === weights.join(','))));
     if (!total) {
       fields.forEach(field => { field.textContent = '—'; });
+      if (confidenceDetail) confidenceDetail.textContent = '';
       status.textContent = chinese ? '請將至少一個權重調高，才可以形成 probability distribution。' : 'Increase at least one weight to define a probability distribution.';
       return;
     }
@@ -33,9 +35,14 @@
     const proximity = -order.reduce((sum, value, i) => sum + (2 - i - value) ** 2, 0);
     const expected = probabilities.reduce((sum, p, i) => sum + i * p, 0);
     const spread = probabilities.reduce((sum, p, i) => sum + p * Math.abs(i - mode), 0);
-    const confidence = Math.max(0, 1 - spread / (2 / 3));
+    const midpoint = (probabilities.length - 1) / 2;
+    const uniformSpread = probabilities.reduce((sum, _, i) => sum + Math.abs(i - midpoint), 0) / probabilities.length;
+    const confidence = Math.max(0, 1 - spread / uniformSpread);
     const scores = {progress, proximity, expected, confidence};
     fields.forEach(field => { field.textContent = format(scores[field.dataset.metric]); });
+    if (confidenceDetail) confidenceDetail.textContent = chinese
+      ? `Confidence 計算：最可能 level = ${mode}；平均距離 D = ${format(spread)}；三個 levels 的基準 U 固定為 2/3。max(0, 1 − ${format(spread)} ÷ (2/3)) = ${format(confidence)}。`
+      : `Confidence calculation: most likely level = ${mode}; average distance D = ${format(spread)}; the three-level reference U stays at 2/3. max(0, 1 − ${format(spread)} ÷ (2/3)) = ${format(confidence)}.`;
     status.textContent = chinese
       ? `Probability 排序：[${order.join(', ')}]。最可能完成 ${mode} 個 milestones；P(完成全部) = ${(probabilities[2] * 100).toFixed(1)}%。Confidence 不代表這條路有多好。`
       : `Probability order: [${order.join(', ')}]. Most likely count: ${mode} milestones; P(all complete) = ${(probabilities[2] * 100).toFixed(1)}%. Confidence does not measure how promising the path is.`;
