@@ -25,3 +25,8 @@ html[lang="zh-CN"] { --sans: 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', 
 html[lang="zh-CN"] h1, html[lang="zh-CN"] h2, html[lang="zh-CN"] h3 { letter-spacing: 0; }
 .language-switch { white-space: nowrap; }
 .topbar nav { flex-wrap: wrap; }
+
+/* Blog */
+.blog-entry{padding:20px 0;border-top:2px solid var(--accent)}.blog-entry h3{font-size:24px;line-height:1.35;margin-bottom:14px}.blog-entry p{font-size:16px;color:var(--muted)}.blog-entry .paper-label{font-size:11px;color:var(--accent)}.blog-links{display:flex;flex-wrap:wrap;gap:12px 20px;font-size:14px}
+
+.blog-all{font-size:14px;margin:14px 0 0}.blog-all a{text-decoration:underline;text-underline-offset:4px}
